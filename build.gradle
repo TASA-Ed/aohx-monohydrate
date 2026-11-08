@@ -1,0 +1,71 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version "9.6.1"
+    id 'com.diffplug.spotless' version "8.10.0"
+}
+
+group = 'top.tasaed.aohx'
+version = '0.1.0'
+
+repositories {
+    maven {
+        url = 'https://maven.aliyun.com/repository/gradle-plugin'
+    }
+    maven {
+        url = 'https://maven.aliyun.com/repository/public'
+    }
+    maven {
+        url = "https://jitpack.io/"
+    }
+    maven {
+        url = "https://plugins.gradle.org/m2/"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    shadow fileTree(dir:'libs',includes: ['*.jar'])
+    implementation("tools.jackson.core:jackson-databind:3.2.3")
+    testImplementation fileTree(dir:'libs',includes: ['*.jar'])
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
+}
+
+tasks.named('shadowJar') {
+    mergeServiceFiles()
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
+
+        removeUnusedImports() // 自动清理未使用的 import
+        formatAnnotations()   // 格式化注解
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+task release {
+    description = 'Create a release set of Jars.'
+    group = 'build'
+    dependsOn shadowJar, sourcesJar
+}

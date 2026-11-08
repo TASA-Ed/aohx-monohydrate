@@ -1,0 +1,21 @@
+{
+  "id": "top.tasaed.aohx.monohydrate",
+  "name": "Monohydrate",
+  "version": "0.1.0",
+  "sdkVersion": ">=1.6.0",
+  "hasTweaker": false,
+  "useLuminosity": true,
+  "tweakClasses": [
+    "top.tasaed.aohx.monohydrate.load.mixins.MixinFileManagerCandidates",
+    "top.tasaed.aohx.monohydrate.load.mixins.MixinLoadMapCandidates",
+    "top.tasaed.aohx.monohydrate.load.mixins.MixinIMGManager",
+    "top.tasaed.aohx.monohydrate.load.mixins.MixinPixmapIOCIM",
+    "top.tasaed.aohx.monohydrate.load.mixins.MixinCFGBorderFont",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinLoader",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinCoreProvinceProfile",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinProvinceProfile",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinFileManagerMac",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinFileManagerDesktop",
+    "top.tasaed.aohx.monohydrate.profiler.mixins.MixinFileManagerMobile"
+  ]
+}
